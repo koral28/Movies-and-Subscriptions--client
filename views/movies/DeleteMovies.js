@@ -1,23 +1,28 @@
 import "../../stylesheets/app.css";
-import {useEffect} from 'react';
-import Movies from '../../models/SubscriptionsDB/movies/moviesWSModel';
+import { useEffect } from "react";
+import Movies from "../../models/SubscriptionsDB/movies/moviesWSModel";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-const DeleteMovies =(props)=>{
-        
-    useEffect(()=>{
-       props.movies.forEach(movie => {
-            /*eslint-disable eqeqeq*/
-            if(props.movieName == movie.Name)
-            {
-                Movies.deleteMoviesData(movie.Name).then(resp=>console.log(resp.data));
-            }
-        });
-    },[])// eslint-disable-line react-hooks/exhaustive-deps
-    
-    return(
-        <div>
+const mapStateToProps = (state) => {
+  return {
+    data: state,
+  };
+};
 
-        </div>
-    )
-}
-export default DeleteMovies;
+const DeleteMovies = (props) => {
+  useEffect(() => {
+    props.data.movies.map((movie) => {
+      /*eslint-disable eqeqeq*/
+      if (props.movieName == movie.Name) {
+        Movies.deleteMoviesData(movie.Name).then((resp) =>
+          props.history.push("/main/moviesMenu")
+        );
+      }
+      return <div></div>;
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return <div></div>;
+};
+export default withRouter(connect(mapStateToProps)(DeleteMovies));

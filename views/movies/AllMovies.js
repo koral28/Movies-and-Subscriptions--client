@@ -1,7 +1,6 @@
-import "../../";
+import "../..";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {

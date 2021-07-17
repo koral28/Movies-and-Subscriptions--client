@@ -8,7 +8,7 @@ import { sessionContext } from "./context";
 
 const LoginComp = (props) => {
   const { register, handleSubmit, errors } = useForm();
-  const [sessionData, setSessionData] = useContext(sessionContext);
+  const [, setSessionData] = useContext(sessionContext);
 
   const onSubmit = (data) => {
     Login.login(data.username, data.password).then((resp) => {
